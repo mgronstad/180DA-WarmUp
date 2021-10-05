@@ -7,7 +7,7 @@ import argparse
 # Read image given by user
 ## [basic-linear-transform-load]
 parser = argparse.ArgumentParser(description='Code for Changing the contrast and brightness of an image! tutorial.')
-parser.add_argument('--input', help='Path to input image.', default='lena.jpg')
+parser.add_argument('--input', help='Path to input image.', default='eggo_sweatshirt.jpg')
 args = parser.parse_args()
 
 image = cv.imread(cv.samples.findFile(args.input))
@@ -51,5 +51,6 @@ cv.imshow('Original Image', image)
 cv.imshow('New Image', new_image)
 
 # Wait until user press some key
-cv.waitKey()
+cv.waitKey(0)
+cv.destroyAllWindows()
 ## [basic-linear-transform-display]
