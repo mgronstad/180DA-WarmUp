@@ -1,8 +1,8 @@
 # references include:
-# https://www.analyticsvidhya.com/blog/2021/08/getting-started-with-object-tracking-using-opencv/
-# https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_canny/py_canny.html#canny
-# https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_colorspaces/py_colorspaces.html#converting-colorspaces
-# https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_gui/py_video_display/py_video_display.html
+#  primary source for bones of object tracking code development:  https://www.analyticsvidhya.com/blog/2021/08/getting-started-with-object-tracking-using-opencv/
+#  segments of the code found here was used to develop the bounded box section of the code: https://github.com/opencv/opencv/blob/master/samples/python/contours.py
+#  used as reference for changing colorspace https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_colorspaces/py_colorspaces.html#converting-colorspaces
+#  code for video capture was developed from here: https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_gui/py_video_display/py_video_display.html
 
 import cv2
 import numpy as np
@@ -13,14 +13,25 @@ while(True):
     # take in each frame
     ret, frame = cap.read()
     # convert BGR to HSV
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    #hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     
-    # define range of red in HSV
-    lower_red = np.array([0,230,170])
-    upper_red = np.array([255,255,220])
+    # define range of blue in HSV
+    #lower_blue = np.array([30,150,50])
+    #upper_blue = np.array([255,255,180])
     
     # threshold hsv image to take in only red colors
-    mask = cv2.inRange(hsv, lower_red, upper_red)
+    #mask = cv2.inRange(hsv, lower_blue, upper_blue)
+    
+    # convert BGR to RGB
+    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    
+    # define range of blue in RBG
+    lower_blue = np.array([0,0,0])
+    # (0, 0, 255) dark blue
+    upper_blue = np.array([50,50,255])
+    
+    # threshold hsv image to take in only red colors
+    mask = cv2.inRange(rgb, lower_blue, upper_blue)
     
     contours,_= cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     
