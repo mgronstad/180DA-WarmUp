@@ -8,7 +8,7 @@ def on_connect(client, userdata, flags, rc):
 
 	# Subscribing in on_connect() means that if we lose the connection and
 	# reconnect then subscriptions will be renewed.
-	# client.subscribe("ece180d/test")
+	# client.subscribe("ece180d/team8/test")
 
 # The callback of the client when it disconnects.
 def on_disconnect(client, userdata, rc):
@@ -41,7 +41,7 @@ client.loop_start()
 # 5. use publish() to publish messages to the broker.
 # payload must be a string, bytearray, int, float or None.
 for i in range(10):
-	client.publish(’ece180d/team8’, float(np.random.random(1)), qos=1)
+	client.publish(’ece180d/team8/test’, float(np.random.random(1)), qos=1)
 
 # 6. use disconnect() to disconnect from the broker.
 client.loop_stop()
